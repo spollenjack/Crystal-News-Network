@@ -7,20 +7,21 @@
 <meta property="og:title" content="Crystal News Network - CNN">
 <meta property="og:description" content="The Republic of Amplon's independent voice. Breaking news and live coverage from across the Republic.">
 <meta property="og:url" content="https://spollenjack.github.io/Crystal-News-Network/">
-<title>Crystal News Network — CNN</title>
+<title>Crystal News Network | CNN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{--lime:#A3E635;--emerald:#10B981;--blue:#0EA5E9;--fog:#F1F1F1;--charcoal:#1C1C1E;--white:#FFFFFF;--muted:#888;--border:#e5e5e5;}
-body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal);min-height:100vh;}
+body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);min-height:100vh;}
 
+.icn{width:1em;height:1em;display:inline-block;vertical-align:-0.14em;flex-shrink:0;}
 /* NAVBAR */
 .navbar{background:var(--charcoal);height:64px;display:flex;align-items:center;padding:0 40px;gap:16px;position:sticky;top:0;z-index:100;}
 .navbar-logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;}
-.logo-mark{width:36px;height:36px;background:var(--emerald);display:flex;align-items:center;justify-content:center;font-family:"Oswald",sans-serif;font-weight:700;font-size:13px;color:white;border-radius:3px;flex-shrink:0;}
-.logo-text{font-family:"Oswald",sans-serif;font-size:15px;font-weight:500;color:var(--fog);letter-spacing:0.06em;text-transform:uppercase;}
+.logo-mark{width:36px;height:36px;background:var(--emerald);display:flex;align-items:center;justify-content:center;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:13px;color:white;border-radius:3px;flex-shrink:0;}
+.logo-text{font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:500;color:var(--fog);letter-spacing:0.06em;text-transform:uppercase;}
 .logo-text span{color:var(--emerald);}
 .navbar-links{display:flex;gap:28px;flex:1;justify-content:center;}
 .navbar-links a{font-size:12px;font-weight:500;color:rgba(241,241,241,0.55);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:color 0.2s;border-bottom:2px solid transparent;padding-bottom:2px;}
@@ -32,11 +33,11 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .navbar-icon-btn{background:none;border:none;color:rgba(241,241,241,0.5);cursor:pointer;font-size:16px;padding:4px 6px;border-radius:3px;transition:all 0.2s;line-height:1;}
 .navbar-icon-btn:hover{color:var(--fog);background:rgba(255,255,255,0.08);}
 
-.navbar-cta{background:var(--lime);color:var(--charcoal);border:none;padding:9px 20px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-radius:3px;text-transform:uppercase;letter-spacing:0.08em;transition:background 0.2s;white-space:nowrap;}
+.navbar-cta{background:var(--lime);color:var(--charcoal);border:none;padding:9px 20px;font-family:"Inter",sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-radius:3px;text-transform:uppercase;letter-spacing:0.08em;transition:background 0.2s;white-space:nowrap;}
 .navbar-cta:hover{background:#bef264;}
 
 /* TICKER */
-.ticker{background:var(--lime);height:34px;display:flex;align-items:center;overflow:hidden;}
+.ticker{background:var(--lime);height:34px;display:flex;align-items:center;overflow:hidden;position:sticky;top:64px;z-index:98;}
 .ticker-label{background:var(--emerald);color:white;font-size:10px;font-weight:500;padding:0 16px;height:100%;display:flex;align-items:center;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
 .ticker-track{overflow:hidden;flex:1;height:100%;display:flex;align-items:center;}
 .ticker-content{display:flex;white-space:nowrap;font-size:12px;font-weight:500;color:var(--charcoal);letter-spacing:0.02em;animation:ticker-scroll 45s linear infinite;}
@@ -46,7 +47,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 /* NEW ARTICLES BANNER */
-.new-articles-banner{display:none;background:var(--emerald);color:white;padding:10px 20px;text-align:center;font-size:13px;font-weight:500;align-items:center;justify-content:center;gap:12px;position:sticky;top:64px;z-index:99;}
+.new-articles-banner{display:none;background:var(--emerald);color:white;padding:10px 20px;text-align:center;font-size:13px;font-weight:500;align-items:center;justify-content:center;gap:12px;position:sticky;top:98px;z-index:97;}
 .new-articles-banner.show{display:flex;}
 .new-banner-btn{background:white;color:var(--emerald);border:none;padding:5px 14px;border-radius:3px;font-size:12px;font-weight:500;cursor:pointer;}
 .new-banner-dismiss{background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:16px;line-height:1;}
@@ -59,8 +60,8 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 /* LOADING */
 .loading-overlay{position:fixed;inset:0;background:var(--charcoal);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;transition:opacity 0.4s;}
 .loading-overlay.hidden{opacity:0;pointer-events:none;}
-.loading-logo{font-family:"Oswald",sans-serif;font-size:13px;font-weight:700;color:white;background:var(--emerald);width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:4px;margin-bottom:20px;}
-.loading-text{font-family:"Oswald",sans-serif;font-size:14px;font-weight:400;color:rgba(241,241,241,0.4);text-transform:uppercase;letter-spacing:0.14em;}
+.loading-logo{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;color:white;background:var(--emerald);width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:4px;margin-bottom:20px;}
+.loading-text{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:400;color:rgba(241,241,241,0.4);text-transform:uppercase;letter-spacing:0.14em;}
 .loading-bar{width:120px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:16px;overflow:hidden;}
 .loading-bar-fill{height:100%;background:var(--lime);border-radius:2px;animation:load-fill 1.2s ease-in-out infinite;}
 @keyframes load-fill{0%{width:0%;margin-left:0;}50%{width:60%;margin-left:20%;}100%{width:0%;margin-left:100%;}}
@@ -77,20 +78,20 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .hero-live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:500;color:var(--lime);letter-spacing:0.1em;text-transform:uppercase;}
 .live-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;animation:pulse 1.6s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.75);}}
-.hero-headline{font-family:"Oswald",sans-serif;font-size:54px;font-weight:600;color:var(--white);line-height:1.07;margin-bottom:18px;letter-spacing:-0.5px;}
+.hero-headline{font-family:"Barlow Condensed",sans-serif;font-size:54px;font-weight:600;color:var(--white);line-height:1.07;margin-bottom:18px;letter-spacing:-0.5px;}
 .hero-meta{font-size:13px;color:rgba(241,241,241,0.5);display:flex;gap:10px;align-items:center;margin-bottom:28px;}
 .hero-meta-sep{color:var(--emerald);}
 .hero-read{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:var(--lime);letter-spacing:0.08em;text-transform:uppercase;transition:gap 0.25s;}
 .hero-clickable:hover .hero-read{gap:16px;}
 .hero-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
 .hero-empty-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:rgba(241,241,241,0.3);margin-bottom:14px;}
-.hero-empty-title{font-family:"Oswald",sans-serif;font-size:36px;font-weight:600;color:rgba(241,241,241,0.4);text-transform:uppercase;margin-bottom:24px;}
-.hero-empty-btn{background:var(--lime);color:var(--charcoal);border:none;padding:12px 28px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;border-radius:3px;}
+.hero-empty-title{font-family:"Barlow Condensed",sans-serif;font-size:36px;font-weight:600;color:rgba(241,241,241,0.4);text-transform:uppercase;margin-bottom:24px;}
+.hero-empty-btn{background:var(--lime);color:var(--charcoal);border:none;padding:12px 28px;font-family:"Inter",sans-serif;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;border-radius:3px;}
 
 /* SECTION */
 .section{padding:44px 40px;max-width:1440px;margin:0 auto;}
 .section-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
-.section-title{font-family:"Oswald",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.16em;color:var(--charcoal);white-space:nowrap;}
+.section-title{font-family:"Barlow Condensed",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.16em;color:var(--charcoal);white-space:nowrap;}
 .section-line{flex:1;height:1px;background:var(--border);}
 .section-pill{font-size:10px;font-weight:500;color:var(--emerald);border:1px solid var(--emerald);padding:3px 10px;border-radius:100px;letter-spacing:0.06em;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:none;}
 .section-pill:hover{background:var(--emerald);color:white;}
@@ -102,11 +103,11 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .story-card-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#ddd;}
 .story-card-body{padding:14px 16px 18px;}
 .story-card-tag{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:9px;}
-.story-card-headline{font-family:"Oswald",sans-serif;font-size:18px;font-weight:500;line-height:1.25;color:var(--charcoal);letter-spacing:0.01em;}
+.story-card-headline{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:500;line-height:1.25;color:var(--charcoal);letter-spacing:0.01em;}
 .story-card-meta{font-size:11px;color:var(--muted);margin-top:9px;}
 .tag-politics{background:#e0f2fe;color:#0369a1;}.tag-weather{background:#dbeafe;color:#1d4ed8;}.tag-crime{background:#fee2e2;color:#b91c1c;}.tag-sports{background:#dcfce7;color:#15803d;}.tag-business{background:#fef9c3;color:#854d0e;}.tag-breaking{background:var(--lime);color:var(--charcoal);}.tag-world{background:#f3e8ff;color:#7e22ce;}.tag-tech{background:#e0f7fa;color:#00796b;}
 .grid-empty{grid-column:1/-1;text-align:center;padding:80px 40px;color:var(--muted);}
-.grid-empty-title{font-family:"Oswald",sans-serif;font-size:20px;text-transform:uppercase;color:#ccc;margin-bottom:8px;}
+.grid-empty-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;text-transform:uppercase;color:#ccc;margin-bottom:8px;}
 
 /* ARTICLE */
 .article-hero-wrap{position:relative;height:440px;overflow:hidden;background:var(--charcoal);}
@@ -122,7 +123,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .delete-btn:hover{background:#fee2e2;}
 .delete-btn:disabled,.edit-btn:disabled{opacity:0.4;cursor:not-allowed;}
 .article-body{max-width:760px;margin:0 auto;padding:12px 24px 60px;}
-.article-headline{font-family:"Oswald",sans-serif;font-size:46px;font-weight:600;line-height:1.08;color:var(--charcoal);margin-bottom:22px;letter-spacing:-0.3px;}
+.article-headline{font-family:"Barlow Condensed",sans-serif;font-size:46px;font-weight:600;line-height:1.08;color:var(--charcoal);margin-bottom:22px;letter-spacing:-0.3px;}
 .article-byline{display:flex;align-items:center;gap:10px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:36px;font-size:13px;color:var(--muted);}
 .article-author{font-weight:500;color:var(--charcoal);}
 .article-views{display:flex;align-items:center;gap:5px;margin-left:auto;font-size:12px;color:var(--muted);}
@@ -135,11 +136,11 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 
 /* SUBMIT */
 .submit-wrap{max-width:660px;margin:0 auto;padding:60px 24px 100px;}
-.page-title{font-family:"Oswald",sans-serif;font-size:38px;font-weight:600;color:var(--charcoal);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.02em;}
+.page-title{font-family:"Barlow Condensed",sans-serif;font-size:38px;font-weight:600;color:var(--charcoal);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.02em;}
 .page-sub{font-size:14px;color:var(--muted);margin-bottom:44px;}
 .form-group{margin-bottom:24px;}
 .form-label{display:block;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:8px;}
-.form-input,.form-select,.form-textarea{width:100%;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:13px 15px;font-family:"DM Sans",sans-serif;font-size:15px;color:var(--charcoal);transition:border-color 0.2s;outline:none;}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:13px 15px;font-family:"Inter",sans-serif;font-size:15px;color:var(--charcoal);transition:border-color 0.2s;outline:none;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--emerald);}
 .form-textarea{height:280px;resize:vertical;line-height:1.7;}
 .img-upload-area{width:100%;border:1.5px dashed var(--border);border-radius:3px;background:var(--white);padding:32px;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative;}
@@ -150,12 +151,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .img-upload-text strong{color:var(--emerald);}
 .img-preview{display:none;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-top:10px;}
 .img-change-btn{display:none;margin-top:8px;font-size:11px;color:var(--muted);text-decoration:underline;cursor:pointer;background:none;border:none;text-transform:uppercase;letter-spacing:0.06em;}
-.form-submit{width:100%;background:var(--lime);color:var(--charcoal);border:none;padding:16px;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;border-radius:3px;transition:background 0.2s,opacity 0.2s;margin-top:8px;}
+.form-submit{width:100%;background:var(--lime);color:var(--charcoal);border:none;padding:16px;font-family:"Inter",sans-serif;font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;border-radius:3px;transition:background 0.2s,opacity 0.2s;margin-top:8px;}
 .form-submit:hover{background:#bef264;}
 .form-submit:disabled{opacity:0.5;cursor:not-allowed;background:var(--lime);}
 .submit-success{display:none;text-align:center;padding:60px 40px;background:var(--white);border-radius:4px;border:1px solid var(--border);}
 .success-icon{width:60px;height:60px;background:var(--emerald);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;color:white;}
-.submit-success h3{font-family:"Oswald",sans-serif;font-size:28px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:8px;}
+.submit-success h3{font-family:"Barlow Condensed",sans-serif;font-size:28px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:8px;}
 .submit-success p{font-size:14px;color:var(--muted);}
 .submit-success-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px;}
 .error-banner{background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 16px;border-radius:3px;font-size:13px;margin-bottom:16px;display:none;}
@@ -164,7 +165,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .category-header{background:var(--charcoal);padding:48px 40px 40px;}
 .category-header-inner{max-width:1440px;margin:0 auto;}
 .category-eyebrow{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:rgba(241,241,241,0.4);margin-bottom:10px;}
-.category-name{font-family:"Oswald",sans-serif;font-size:48px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:28px;}
+.category-name{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:28px;}
 .category-pills{display:flex;gap:10px;flex-wrap:wrap;}
 .cat-pill{padding:7px 18px;border-radius:100px;border:1px solid rgba(255,255,255,0.15);font-size:12px;font-weight:500;color:rgba(241,241,241,0.6);background:transparent;cursor:pointer;transition:all 0.15s;}
 .cat-pill:hover{border-color:var(--lime);color:var(--lime);}
@@ -175,23 +176,23 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .about-hero{background:var(--charcoal);padding:88px 40px;text-align:center;position:relative;overflow:hidden;}
 .about-hero-bg{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(163,230,53,0.03) 0px,rgba(163,230,53,0.03) 1px,transparent 1px,transparent 80px);}
 .about-hero-tag{display:inline-block;background:var(--lime);color:var(--charcoal);font-size:10px;font-weight:500;padding:4px 12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;margin-bottom:22px;position:relative;}
-.about-hero-title{font-family:"Oswald",sans-serif;font-size:72px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-1px;line-height:1;position:relative;}
+.about-hero-title{font-family:"Barlow Condensed",sans-serif;font-size:72px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:-1px;line-height:1;position:relative;}
 .about-hero-title span{color:var(--emerald);}
 .about-hero-sub{font-family:"Lora",serif;font-style:italic;font-size:18px;color:rgba(241,241,241,0.45);margin-top:20px;position:relative;}
 .about-body{max-width:900px;margin:0 auto;padding:72px 40px 100px;}
 .about-section{margin-bottom:64px;}
 .about-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:var(--emerald);margin-bottom:10px;}
-.about-title{font-family:"Oswald",sans-serif;font-size:30px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:18px;letter-spacing:0.02em;}
+.about-title{font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:18px;letter-spacing:0.02em;}
 .about-text{font-family:"Lora",serif;font-size:17px;line-height:1.85;color:#3a3a3c;}
 .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px;}
 .stat-card{background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:28px 24px;text-align:center;}
-.stat-number{font-family:"Oswald",sans-serif;font-size:48px;font-weight:700;color:var(--emerald);line-height:1;margin-bottom:8px;}
+.stat-number{font-family:"Barlow Condensed",sans-serif;font-size:48px;font-weight:700;color:var(--emerald);line-height:1;margin-bottom:8px;}
 .stat-label{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);}
 
 /* FOOTER */
 .footer{background:var(--charcoal);padding:56px 40px 32px;margin-top:80px;}
 .footer-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
-.footer-brand-name{font-family:"Oswald",sans-serif;font-size:18px;font-weight:600;color:var(--fog);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
+.footer-brand-name{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:600;color:var(--fog);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
 .footer-brand-name span{color:var(--emerald);}
 .footer-tagline{font-family:"Lora",serif;font-style:italic;font-size:13px;color:rgba(241,241,241,0.35);line-height:1.6;margin-top:10px;}
 .footer-col-title{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:rgba(241,241,241,0.35);margin-bottom:18px;}
@@ -209,24 +210,24 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .search-header{padding:24px 40px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.08);}
 .search-input-wrap{flex:1;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.06);border-radius:4px;padding:12px 16px;}
 .search-icon{font-size:18px;color:rgba(241,241,241,0.4);}
-.search-input{flex:1;background:none;border:none;outline:none;font-family:"DM Sans",sans-serif;font-size:18px;color:var(--fog);}
+.search-input{flex:1;background:none;border:none;outline:none;font-family:"Inter",sans-serif;font-size:18px;color:var(--fog);}
 .search-input::placeholder{color:rgba(241,241,241,0.25);}
-.search-close{background:none;border:none;color:rgba(241,241,241,0.5);font-size:14px;cursor:pointer;padding:8px 12px;border-radius:3px;font-family:"DM Sans",sans-serif;text-transform:uppercase;letter-spacing:0.08em;transition:color 0.2s;}
+.search-close{background:none;border:none;color:rgba(241,241,241,0.5);font-size:14px;cursor:pointer;padding:8px 12px;border-radius:3px;font-family:"Inter",sans-serif;text-transform:uppercase;letter-spacing:0.08em;transition:color 0.2s;}
 .search-close:hover{color:var(--fog);}
 .search-body{flex:1;overflow-y:auto;padding:32px 40px;}
 .search-count{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(241,241,241,0.35);margin-bottom:24px;}
 .search-results{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .search-empty{text-align:center;padding:80px 40px;color:rgba(241,241,241,0.3);}
-.search-empty-title{font-family:"Oswald",sans-serif;font-size:22px;text-transform:uppercase;margin-bottom:8px;}
+.search-empty-title{font-family:"Barlow Condensed",sans-serif;font-size:22px;text-transform:uppercase;margin-bottom:8px;}
 
 /* EDIT MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex;}
 .edit-modal{background:var(--fog);border-radius:6px;width:100%;max-width:660px;max-height:92vh;overflow-y:auto;padding:40px;}
-.modal-title{font-family:"Oswald",sans-serif;font-size:28px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:6px;}
+.modal-title{font-family:"Barlow Condensed",sans-serif;font-size:28px;font-weight:600;color:var(--charcoal);text-transform:uppercase;margin-bottom:6px;}
 .modal-sub{font-size:13px;color:var(--muted);margin-bottom:32px;}
 .modal-actions{display:flex;gap:10px;margin-top:8px;}
-.modal-cancel{flex:1;background:none;border:1px solid var(--border);color:var(--muted);padding:14px;font-family:"DM Sans",sans-serif;font-size:13px;cursor:pointer;border-radius:3px;transition:all 0.2s;}
+.modal-cancel{flex:1;background:none;border:1px solid var(--border);color:var(--muted);padding:14px;font-family:"Inter",sans-serif;font-size:13px;cursor:pointer;border-radius:3px;transition:all 0.2s;}
 .modal-cancel:hover{border-color:var(--charcoal);color:var(--charcoal);}
 .edit-current-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:8px;display:none;}
 .edit-img-note{font-size:11px;color:var(--muted);margin-bottom:10px;}
@@ -252,7 +253,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .mobile-menu-section{padding:12px 24px 4px;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:0.14em;color:rgba(241,241,241,0.25);}
 
 
-.mobile-menu-cta{margin:16px 24px 8px;background:var(--lime);color:var(--charcoal);border:none;padding:13px 20px;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:3px;text-transform:uppercase;letter-spacing:0.08em;text-align:center;}
+.mobile-menu-cta{margin:16px 24px 8px;background:var(--lime);color:var(--charcoal);border:none;padding:13px 20px;font-family:"Inter",sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:3px;text-transform:uppercase;letter-spacing:0.08em;text-align:center;}
 
 /* RESPONSIVE */
 
@@ -336,7 +337,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
   padding: 8px 18px;
@@ -354,7 +355,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .reaction-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 
-/* ——— ARCHIVE PAGE ——— */
+/* === ARCHIVE PAGE === */
 .archive-header {
   background: var(--charcoal);
   padding: 48px 40px 40px;
@@ -365,7 +366,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   letter-spacing: 0.14em; color: rgba(241,241,241,0.4); margin-bottom: 10px;
 }
 .archive-title {
-  font-family: 'Oswald', sans-serif; font-size: 48px; font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 700;
   color: var(--white); text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 12px;
 }
 .archive-sub { font-size: 14px; color: rgba(241,241,241,0.4); max-width: 560px; line-height: 1.6; }
@@ -375,21 +376,21 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   padding: 32px; margin-bottom: 48px;
 }
 .archive-upload-title {
-  font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--charcoal); margin-bottom: 20px;
 }
 .archive-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .archive-form-full { grid-column: 1 / -1; }
 .archive-submit {
   grid-column: 1 / -1; background: var(--lime); color: var(--charcoal); border: none;
-  padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 14px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
   text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border-radius: 3px;
   transition: background 0.2s; margin-top: 4px;
 }
 .archive-submit:hover { background: #bef264; }
 .archive-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 .archive-list-title {
-  font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.16em; color: var(--charcoal);
   margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
 }
@@ -406,7 +407,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
 .archive-card-title {
-  font-family: 'Oswald', sans-serif; font-size: 17px; font-weight: 500;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 500;
   color: var(--charcoal); letter-spacing: 0.01em; line-height: 1.3;
 }
 .archive-card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; flex: 1; }
@@ -414,7 +415,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 .archive-card-actions { display: flex; gap: 8px; margin-top: 4px; }
 .archive-download-btn {
   flex: 1; background: var(--charcoal); color: var(--fog); border: none;
-  padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+  padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
   text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; border-radius: 3px;
   transition: background 0.2s; text-align: center; text-decoration: none; display: flex;
   align-items: center; justify-content: center; gap: 6px;
@@ -429,7 +430,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   grid-column: 1 / -1; text-align: center; padding: 80px 40px; color: var(--muted);
 }
 .archive-empty-title {
-  font-family: 'Oswald', sans-serif; font-size: 20px; text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 20px; text-transform: uppercase;
   color: #ccc; margin-bottom: 8px;
 }
 .archive-error { background:#fee2e2; border:1px solid #fca5a5; color:#b91c1c; padding:12px 16px; border-radius:3px; font-size:13px; margin-bottom:16px; display:none; }
@@ -457,7 +458,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 <div class="new-articles-banner" id="new-articles-banner">
   <span id="new-articles-text">New stories available</span>
   <button class="new-banner-btn" onclick="refreshNewArticles()">Refresh Feed</button>
-  <button class="new-banner-dismiss" onclick="dismissNewArticlesBanner()">✕</button>
+  <button class="new-banner-dismiss" onclick="dismissNewArticlesBanner()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
 </div>
 
 <nav class="navbar">
@@ -472,7 +473,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
     <a id="nav-archive" onclick="showPage('archive')">Archive</a>
   </div>
   <div class="navbar-right">
-    <button class="navbar-icon-btn" onclick="openSearch()" title="Search">🔍</button>
+    <button class="navbar-icon-btn" onclick="openSearch()" title="Search"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
     <button class="navbar-cta" onclick="showPage('submit')">+ Submit a Story</button>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
@@ -485,7 +486,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   <a id="mnav-category" onclick="showPage('category');closeMobileMenu()">Categories</a>
   <a id="mnav-about" onclick="showPage('about');closeMobileMenu()">About</a>
   <a id="mnav-archive" onclick="showPage('archive');closeMobileMenu()">Archive</a>
-  <a onclick="openSearch();closeMobileMenu()">🔍 Search</a>
+  <a onclick="openSearch();closeMobileMenu()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Search</a>
   <button class="mobile-menu-cta" onclick="showPage('submit');closeMobileMenu()">+ Submit a Story</button>
 </div>
 
@@ -498,10 +499,10 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
 <div class="search-overlay" id="search-overlay">
   <div class="search-header">
     <div class="search-input-wrap">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
       <input class="search-input" id="search-input" placeholder="Search stories..." oninput="runSearch()" autocomplete="off">
     </div>
-    <button class="search-close" onclick="closeSearch()">Close ✕</button>
+    <button class="search-close" onclick="closeSearch()">Close <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
   <div class="search-body">
     <div class="search-count" id="search-count"></div>
@@ -539,12 +540,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
       <div class="img-upload-area">
         <input type="file" accept="image/*" id="edit-image" onchange="handleEditImageUpload(this)">
         <div id="edit-upload-placeholder">
-          <div class="img-upload-icon">🖼</div>
+          <div class="img-upload-icon"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>
           <div class="img-upload-text"><strong>Upload new image</strong> to replace current</div>
         </div>
         <img class="img-preview" id="edit-img-preview" src="" alt="">
       </div>
-      <button class="img-change-btn" id="edit-img-change-btn" onclick="resetEditImage()">✕ Remove new image</button>
+      <button class="img-change-btn" id="edit-img-change-btn" onclick="resetEditImage()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Remove new image</button>
     </div>
     <div class="form-group">
       <label class="form-label">Story</label>
@@ -574,7 +575,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
         <span class="hero-meta-sep">◆</span>
         <span id="hero-date"></span>
       </div>
-      <span class="hero-read">Read Full Story →</span>
+      <span class="hero-read">Read Full Story <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
     </div>
     <div class="hero-empty" id="hero-empty">
       <div class="hero-empty-label">The Republic of Amplon's Independent News Network</div>
@@ -586,7 +587,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
     <div class="section-header">
       <span class="section-title">Latest Stories</span>
       <div class="section-line"></div>
-      <button class="section-pill" onclick="showPage('category')">View All →</button>
+      <button class="section-pill" onclick="showPage('category')">View All <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
     </div>
     <div class="story-grid" id="home-grid"></div>
   </div>
@@ -598,16 +599,16 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
     <img class="article-hero" id="article-img" src="" alt="">
     <div class="article-hero-overlay"></div>
     <div class="archive-hero-banner" id="archive-hero-banner">
-      <div style="width:64px;height:64px;background:rgba(163,230,53,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:20px;color:white;letter-spacing:1px;margin-bottom:4px;">CNN</div>
-      <span style="font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:rgba(163,230,53,0.6);">Archived Article</span>
+      <div style="width:64px;height:64px;background:rgba(163,230,53,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:white;letter-spacing:1px;margin-bottom:4px;">CNN</div>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:rgba(163,230,53,0.6);">Archived Article</span>
       <span style="font-size:12px;color:rgba(241,241,241,0.3);">Image removed to conserve storage</span>
     </div>
   </div>
   <div class="article-actions">
-    <button class="back-btn" onclick="goBack()">← Back</button>
+    <button class="back-btn" onclick="goBack()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Back</button>
     <div class="article-action-btns">
-      <button class="edit-btn" id="edit-btn" onclick="editArticle()">✏ Edit</button>
-      <button class="delete-btn" id="delete-btn" onclick="deleteArticle()">🗑 Delete</button>
+      <button class="edit-btn" id="edit-btn" onclick="editArticle()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Edit</button>
+      <button class="delete-btn" id="delete-btn" onclick="deleteArticle()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Delete</button>
     </div>
   </div>
   <div class="article-body">
@@ -618,16 +619,16 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
       <span class="article-author" id="article-author"></span>
       <span>·</span>
       <span id="article-date"></span>
-      <div class="article-views">👁 <span id="article-views">0</span></div>
+      <div class="article-views"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> <span id="article-views">0</span></div>
     </div>
     <div class="article-text" id="article-text"></div>
     <div class="article-reactions">
       <span class="reaction-label">Reactions</span>
       <button class="reaction-btn" id="like-btn" onclick="reactToArticle('like')">
-        👍 <span id="like-count">0</span>
+        <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg> <span id="like-count">0</span>
       </button>
       <button class="reaction-btn" id="dislike-btn" onclick="reactToArticle('dislike')">
-        👎 <span id="dislike-count">0</span>
+        <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg> <span id="dislike-count">0</span>
       </button>
     </div>
   </div>
@@ -664,18 +665,18 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
         <div class="img-upload-area">
           <input type="file" accept="image/*" id="field-image" onchange="handleImageUpload(this)">
           <div id="upload-placeholder">
-            <div class="img-upload-icon">🖼</div>
-            <div class="img-upload-text"><strong>Click to upload</strong> or drag and drop<br>JPG, PNG, WEBP — keep under 1MB</div>
+            <div class="img-upload-icon"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>
+            <div class="img-upload-text"><strong>Click to upload</strong> or drag and drop<br>JPG, PNG, WEBP, keep under 1MB</div>
           </div>
           <img class="img-preview" id="img-preview" src="" alt="">
         </div>
-        <button class="img-change-btn" id="img-change-btn" onclick="resetImage()">✕ Remove image</button>
+        <button class="img-change-btn" id="img-change-btn" onclick="resetImage()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Remove image</button>
       </div>
       <div class="form-group"><label class="form-label">Your Story</label><textarea class="form-textarea" id="field-body" placeholder="Write your full report here. Separate paragraphs with a blank line."></textarea></div>
       <button class="form-submit" id="submit-btn" onclick="submitStory()">Publish Story</button>
     </div>
     <div class="submit-success" id="submit-success">
-      <div class="success-icon">✓</div>
+      <div class="success-icon"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h3>Story Published</h3>
       <p>Your report is now live on Crystal News Network.</p>
       <div class="submit-success-btns">
@@ -714,13 +715,13 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
     <div class="about-section">
       <div class="about-label">Our Mission</div>
       <div class="about-title">Amplon's Independent Voice</div>
-      <p class="about-text">Crystal News Network is the Republic of Amplon's most trusted independent news organisation. Founded to bring clarity to a complex world, CNN delivers breaking stories, in-depth reports, and live coverage from across Amplon and beyond.<br><br>Our reporters are embedded throughout the Republic, providing real-time coverage of the events that shape our nation — from the halls of government to the streets of every district. We believe every story deserves to be told, and told well.</p>
+      <p class="about-text">Crystal News Network is the Republic of Amplon's most trusted independent news organisation. Founded to bring clarity to a complex world, CNN delivers breaking stories, in-depth reports, and live coverage from across Amplon and beyond.<br><br>Our reporters are embedded throughout the Republic, providing real-time coverage of the events that shape our nation, from the halls of government to the streets of every district. We believe every story deserves to be told, and told well.</p>
     </div>
     <div class="about-section">
       <div class="about-label">Submissions</div>
       <div class="about-title">Report a Story</div>
-      <p class="about-text">Crystal News Network is a community-driven network open to all citizens of Amplon. Anyone can file a report — provide your name, a headline, a category, and your story. An image is optional but encouraged. We publish all community submissions in real time.</p>
-      <br><button class="form-submit" style="width:auto;padding:12px 28px;margin-top:16px;" onclick="showPage('submit')">Submit a Story →</button>
+      <p class="about-text">Crystal News Network is a community-driven network open to all citizens of Amplon. Anyone can file a report: provide your name, a headline, a category, and your story. An image is optional but encouraged. We publish all community submissions in real time.</p>
+      <br><button class="form-submit" style="width:auto;padding:12px 28px;margin-top:16px;" onclick="showPage('submit')">Submit a Story <svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
     </div>
   </div>
 </div>
@@ -738,12 +739,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
   <div class="archive-body">
     <!-- Upload section -->
     <div class="archive-upload-area">
-      <div class="archive-upload-title">📁 Upload New Archive</div>
+      <div class="archive-upload-title"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> Upload New Archive</div>
       <div class="archive-error" id="archive-error"></div>
       <div class="archive-form">
         <div class="form-group" style="margin-bottom:0;">
           <label class="form-label">Archive Title</label>
-          <input type="text" class="form-input" id="archive-title" placeholder="e.g. CNN Archive — January 2026">
+          <input type="text" class="form-input" id="archive-title" placeholder="e.g. CNN Archive - January 2026">
         </div>
         <div class="form-group" style="margin-bottom:0;">
           <label class="form-label">CSV File</label>
@@ -799,12 +800,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--fog);color:var(--charcoal
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© Crystal News Network — The Republic of Amplon. All rights reserved.</span>
+    <span class="footer-copy">© Crystal News Network, The Republic of Amplon. All rights reserved.</span>
     <div class="footer-live"><div class="live-dot"></div>Live Broadcast</div>
   </div>
 </footer>
 
-<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
 
 <script>
 // ═══════════════════════════════════════
@@ -818,7 +819,7 @@ const TAG_MAP = {politics:'tag-politics',weather:'tag-weather',crime:'tag-crime'
 
 
 let articles = [], pendingImageData = null, editImageData = null, editKeepExistingImg = true;
-let prevPage = 'home', currentArticleId = null, db = null, loadingTimeout = null, newestTs = 0;
+let prevPage = 'home', currentArticleId = null, db = null, loadingTimeout = null, newestTs = 0, articleStack = [];
 let autoRefreshTimer = null;
 
 /* HELPERS */
@@ -829,8 +830,8 @@ function noImgPlaceholder(archived){
   const border=archived?'border-top:2px solid rgba(163,230,53,0.4);':'';  const logoCol=archived?'rgba(163,230,53,0.35)':'rgba(255,255,255,0.12)';
   const textCol=archived?'rgba(163,230,53,0.5)':'rgba(255,255,255,0.2)';
   return '<div class="story-card-img" style="background:var(--charcoal);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;'+border+'">'+
-    '<div style="width:44px;height:44px;background:'+logoCol+';border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:\'Oswald\',sans-serif;font-weight:700;font-size:14px;color:white;letter-spacing:0.5px;">CNN</div>'+
-    (archived?'<span style="font-family:\'Oswald\',sans-serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:'+textCol+';">Archived</span>':'')+
+    '<div style="width:44px;height:44px;background:'+logoCol+';border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:14px;color:white;letter-spacing:0.5px;">CNN</div>'+
+    (archived?'<span style="font-family:\'Barlow Condensed\',sans-serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:'+textCol+';">Archived</span>':'')+
     '</div>';}
 function buildCard(a){
   const imgHtml=a.img?'<img class="story-card-img" src="'+a.img+'" alt="" loading="lazy">':noImgPlaceholder(a.archived);
@@ -854,7 +855,7 @@ async function fetchArticles(){
   }finally{renderHome();renderTicker();hideLoading();}
 }
 function hideLoading(){const o=document.getElementById('loading-overlay');o.classList.add('hidden');setTimeout(()=>o.style.display='none',400);}
-function showConfigBanner(msg){const b=document.createElement('div');b.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--fog);padding:14px 24px;border-radius:4px;font-size:13px;z-index:200;border-left:4px solid var(--lime);max-width:520px;text-align:center;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.3);';b.innerHTML='⚠️  '+msg;document.body.appendChild(b);setTimeout(()=>b.remove(),10000);}
+function showConfigBanner(msg){const b=document.createElement('div');b.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--fog);padding:14px 24px;border-radius:4px;font-size:13px;z-index:200;border-left:4px solid var(--lime);max-width:520px;text-align:center;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.3);';b.innerHTML='<svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>  '+msg;document.body.appendChild(b);setTimeout(()=>b.remove(),10000);}
 
 /* ARCHIVE */
 async function archiveOldArticles(){
@@ -868,7 +869,7 @@ async function archiveOldArticles(){
   }catch(err){console.error('Archive error:',err.message);}
 }
 
-/* ——— ARCHIVE PAGE ——— */
+/* === ARCHIVE PAGE === */
 async function fetchArchives() {
   if (!db) return;
   try {
@@ -890,13 +891,13 @@ function renderArchiveList(archives) {
   list.innerHTML = archives.map(a => {
     const desc = a.description ? `<div class="archive-card-desc">${a.description}</div>` : '';
     return `<div class="archive-card">
-      <div class="archive-card-icon">📰</div>
+      <div class="archive-card-icon"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></div>
       <div class="archive-card-title">${a.title}</div>
       ${desc}
       <div class="archive-card-meta">Uploaded ${formatDate(a.uploaded_at)}</div>
       <div class="archive-card-actions">
-        <a class="archive-download-btn" href="${a.file_url}" download="${a.filename}">⬇ Download CSV</a>
-        <button class="archive-delete-btn" onclick="deleteArchive(${a.id}, '${a.filename}')" title="Delete">🗑</button>
+        <a class="archive-download-btn" href="${a.file_url}" download="${a.filename}"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download CSV</a>
+        <button class="archive-delete-btn" onclick="deleteArchive(${a.id}, '${a.filename}')" title="Delete"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
       </div>
     </div>`;
   }).join('');
@@ -963,7 +964,7 @@ async function incrementViews(id){
 /* TICKER */
 function renderTicker(){
   const el=document.getElementById('ticker-content');if(!el)return;
-  if(articles.length===0){el.style.animation='none';el.innerHTML='<span class="ticker-empty">No stories filed yet — be the first to report from Amplon.</span>';return;}
+  if(articles.length===0){el.style.animation='none';el.innerHTML='<span class="ticker-empty">No stories filed yet. Be the first to report from Amplon.</span>';return;}
   const latest=articles.slice(0,3),doubled=[...latest,...latest];
   el.style.animation='ticker-scroll 45s linear infinite';
   el.innerHTML=doubled.map(a=>'<span>'+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
@@ -987,7 +988,7 @@ function renderHome(){
     document.getElementById('hero-author').textContent=h.author;
     document.getElementById('hero-date').textContent=formatDate(h.ts);
   }
-  const rest=articles.slice(1);
+  const rest=articles.slice(1,10);
   document.getElementById('home-grid').innerHTML=rest.length?rest.map(buildCard).join(''): '<div class="grid-empty"><div class="grid-empty-title">No further stories yet</div>Submit a story to get the newsroom started.</div>';
 }
 
@@ -1010,8 +1011,13 @@ function renderAbout(){
     '<div class="stat-card"><div class="stat-number">'+CATEGORIES.length+'</div><div class="stat-label">Coverage Areas</div></div>';}
 
 /* ARTICLE */
-function openArticle(id){
+function openArticle(id,fromHistory){
   const a=articles.find(x=>x.id===id);if(!a)return;
+  const onArticle=document.querySelector('.page.active')&&document.querySelector('.page.active').id==='page-article';
+  if(!fromHistory){
+    if(onArticle&&currentArticleId&&currentArticleId!==id){articleStack.push(currentArticleId);}
+    else if(!onArticle){prevPage=document.querySelector('.page.active').id.replace('page-','');articleStack=[];}
+  }
   currentArticleId=id;
   const imgEl=document.getElementById('article-img');
   const archBanner=document.getElementById('archive-hero-banner');
@@ -1026,12 +1032,14 @@ function openArticle(id){
   updateReactionUI(a);
   document.getElementById('article-text').innerHTML=(a.body||'').split(/\n\n+/).map(p=>'<p>'+p.replace(/\n/g,'<br>')+'</p>').join('');
   renderRelatedArticles(a);
-  prevPage=document.querySelector('.page.active').id.replace('page-','');
   showPage('article');
-  incrementViews(id);
+  if(!fromHistory)incrementViews(id);
 }
 function openHeroArticle(){if(articles.length)openArticle(articles[0].id);}
-function goBack(){showPage(prevPage);}
+function goBack(){
+  if(articleStack.length){openArticle(articleStack.pop(),true);}
+  else{showPage(prevPage);}
+}
 
 /* RELATED ARTICLES */
 function renderRelatedArticles(current){
@@ -1051,8 +1059,8 @@ async function deleteArticle(){
     const{error}=await db.from('articles').delete().eq('id',currentArticleId);
     if(error)throw new Error(error.message);
     articles=articles.filter(a=>a.id!==currentArticleId);
-    currentArticleId=null;renderHome();renderTicker();goBack();
-  }catch(err){alert('Failed to delete: '+err.message);btn.disabled=false;btn.textContent='🗑 Delete';}
+    articleStack=[];currentArticleId=null;renderHome();renderTicker();goBack();
+  }catch(err){alert('Failed to delete: '+err.message);btn.disabled=false;btn.innerHTML='<svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Delete';}
 }
 
 /* EDIT */
@@ -1064,7 +1072,7 @@ function editArticle(){
   const curImg=document.getElementById('edit-current-img');
   const note=document.getElementById('edit-img-note');
   if(a.img&&!a.archived){curImg.src=a.img;curImg.style.display='block';note.textContent='Current image shown above. Upload a new one to replace it.';}
-  else if(a.archived){curImg.style.display='none';note.textContent='This article is archived — its image has been removed.';}
+  else if(a.archived){curImg.style.display='none';note.textContent='This article is archived. Its image has been removed.';}
   else{curImg.style.display='none';note.textContent='No image attached.';}
   editImageData=null;editKeepExistingImg=true;
   resetEditImage();
@@ -1219,7 +1227,7 @@ async function submitStory(){
     const timeoutPromise=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Request timed out after 10 seconds')),10000));
     const{data,error}=await Promise.race([insertPromise,timeoutPromise]);
     if(error)throw new Error(error.message);
-    if(!data||data.length===0)throw new Error('Insert returned no data — check your RLS insert policy.');
+    if(!data||data.length===0)throw new Error('Insert returned no data. Check your RLS insert policy.');
     articles.unshift(data[0]);
     newestTs=data[0].ts;
     await archiveOldArticles();
