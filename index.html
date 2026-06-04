@@ -108,16 +108,16 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
 .tag-politics{background:#e0f2fe;color:#0369a1;}.tag-weather{background:#dbeafe;color:#1d4ed8;}.tag-crime{background:#fee2e2;color:#b91c1c;}.tag-sports{background:#dcfce7;color:#15803d;}.tag-business{background:#fef9c3;color:#854d0e;}.tag-breaking{background:var(--lime);color:var(--charcoal);}.tag-world{background:#f3e8ff;color:#7e22ce;}.tag-tech{background:#e0f7fa;color:#00796b;}.tag-local{background:#fff7ed;color:#c2410c;}.tag-national{background:#f0fdf4;color:#166534;}
 
 /* HEADLINE TOGGLE */
-.headline-toggle-wrap{display:flex;align-items:center;gap:12px;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:13px 15px;cursor:pointer;transition:border-color 0.2s;user-select:none;}
-.headline-toggle-wrap:hover{border-color:var(--emerald);}
-.headline-toggle-wrap.active{border-color:var(--lime);background:#f7ffe0;}
-.headline-toggle-pill{width:38px;height:22px;background:#ddd;border-radius:100px;position:relative;transition:background 0.2s;flex-shrink:0;}
-.headline-toggle-pill::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;background:white;border-radius:50%;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
-.headline-toggle-wrap.active .headline-toggle-pill{background:var(--lime);}
-.headline-toggle-wrap.active .headline-toggle-pill::after{transform:translateX(16px);}
-.headline-toggle-text{flex:1;}
-.headline-toggle-label{font-size:13px;font-weight:500;color:var(--charcoal);}
-.headline-toggle-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.hero-toggle-wrap{display:flex;align-items:center;gap:12px;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:13px 15px;cursor:pointer;transition:border-color 0.2s;user-select:none;}
+.hero-toggle-wrap:hover{border-color:var(--emerald);}
+.hero-toggle-wrap.active{border-color:var(--lime);background:#f7ffe0;}
+.hero-toggle-pill{width:38px;height:22px;background:#ddd;border-radius:100px;position:relative;transition:background 0.2s;flex-shrink:0;}
+.hero-toggle-pill::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;background:white;border-radius:50%;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+.hero-toggle-wrap.active .hero-toggle-pill{background:var(--lime);}
+.hero-toggle-wrap.active .hero-toggle-pill::after{transform:translateX(16px);}
+.hero-toggle-text{flex:1;}
+.hero-toggle-label{font-size:13px;font-weight:500;color:var(--charcoal);}
+.hero-toggle-sub{font-size:11px;color:var(--muted);margin-top:2px;}
 .grid-empty{grid-column:1/-1;text-align:center;padding:80px 40px;color:var(--muted);}
 .grid-empty-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;text-transform:uppercase;color:#ccc;margin-bottom:8px;}
 
@@ -566,12 +566,12 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
       <textarea class="form-textarea" id="edit-body"></textarea>
     </div>
     <div class="form-group">
-      <label class="form-label">Headline Story</label>
-      <div class="headline-toggle-wrap" id="edit-headline-toggle" onclick="toggleHeadline('edit')">
-        <div class="headline-toggle-pill"></div>
-        <div class="headline-toggle-text">
-          <div class="headline-toggle-label">Pin as Headline Story</div>
-          <div class="headline-toggle-sub">Pins this article to the top of the homepage and ticker until a newer headline is set.</div>
+      <label class="form-label">Hero Article</label>
+      <div class="hero-toggle-wrap" id="edit-hero-toggle" onclick="toggleHero('edit')">
+        <div class="hero-toggle-pill"></div>
+        <div class="hero-toggle-text">
+          <div class="hero-toggle-label">Pin as Hero Article</div>
+          <div class="hero-toggle-sub">Pins this article as the Hero Article on the homepage and ticker until another is set.</div>
         </div>
       </div>
     </div>
@@ -699,12 +699,12 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
       </div>
       <div class="form-group"><label class="form-label">Your Story</label><textarea class="form-textarea" id="field-body" placeholder="Write your full report here. Separate paragraphs with a blank line."></textarea></div>
       <div class="form-group">
-        <label class="form-label">Headline Story</label>
-        <div class="headline-toggle-wrap" id="submit-headline-toggle" onclick="toggleHeadline('submit')">
-          <div class="headline-toggle-pill"></div>
-          <div class="headline-toggle-text">
-            <div class="headline-toggle-label">Pin as Headline Story</div>
-            <div class="headline-toggle-sub">Pins this article to the top of the homepage and ticker until a newer headline is set.</div>
+        <label class="form-label">Hero Article</label>
+        <div class="hero-toggle-wrap" id="submit-hero-toggle" onclick="toggleHero('submit')">
+          <div class="hero-toggle-pill"></div>
+          <div class="hero-toggle-text">
+            <div class="hero-toggle-label">Pin as Hero Article</div>
+            <div class="hero-toggle-sub">Pins this article as the Hero Article on the homepage and ticker until another is set.</div>
           </div>
         </div>
       </div>
@@ -856,7 +856,7 @@ const TAG_MAP = {politics:'tag-politics',weather:'tag-weather',crime:'tag-crime'
 let articles = [], pendingImageData = null, editImageData = null, editKeepExistingImg = true;
 let prevPage = 'home', currentArticleId = null, db = null, loadingTimeout = null, newestTs = 0, articleStack = [];
 let autoRefreshTimer = null;
-let submitHeadlineActive = false, editHeadlineActive = false;
+let submitHeroActive = false, editHeroActive = false;
 
 /* HELPERS */
 function tagClass(cat){return TAG_MAP[(cat||'').toLowerCase()]||'tag-breaking';}
@@ -882,7 +882,7 @@ async function fetchArticles(){
   try{
     const{data,error}=await db.from('articles').select('*').order('ts',{ascending:false});
     if(error)throw new Error(error.message);
-    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0,headline:a.is_headline??false}));
+    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0,is_headline:a.is_headline??false}));
     newestTs=articles.length?articles[0].ts:0;
     clearTimeout(loadingTimeout);
   }catch(err){
@@ -890,7 +890,7 @@ async function fetchArticles(){
     showConfigBanner(SUPABASE_URL==='YOUR_SUPABASE_URL'?'Supabase credentials not set.':'Could not reach Supabase. Check CORS settings and that the articles table exists.');
   }finally{renderHome();renderTicker();hideLoading();}
 }
-function getHeadlineArticle(){return articles.find(a=>a.headline===true)||articles[0]||null;}
+function getHeadlineArticle(){return articles.find(a=>a.is_headline===true)||articles[0]||null;}
 function hideLoading(){const o=document.getElementById('loading-overlay');o.classList.add('hidden');setTimeout(()=>o.style.display='none',400);}
 function showConfigBanner(msg){const b=document.createElement('div');b.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--fog);padding:14px 24px;border-radius:4px;font-size:13px;z-index:200;border-left:4px solid var(--lime);max-width:520px;text-align:center;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.3);';b.innerHTML='<svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>  '+msg;document.body.appendChild(b);setTimeout(()=>b.remove(),10000);}
 
@@ -1002,7 +1002,7 @@ async function incrementViews(id){
 function renderTicker(){
   const el=document.getElementById('ticker-content');if(!el)return;
   if(articles.length===0){el.style.animation='none';el.innerHTML='<span class="ticker-empty">No stories filed yet. Be the first to report from Amplon.</span>';return;}
-  const pinned=articles.find(a=>a.headline===true);
+  const pinned=articles.find(a=>a.is_headline===true);
   let tickerArticles;
   if(pinned){
     const others=articles.filter(a=>a.id!==pinned.id).slice(0,2);
@@ -1012,7 +1012,7 @@ function renderTicker(){
   }
   const doubled=[...tickerArticles,...tickerArticles];
   el.style.animation='ticker-scroll 45s linear infinite';
-  el.innerHTML=doubled.map(a=>'<span>'+(a.headline?'★ ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
+  el.innerHTML=doubled.map(a=>'<span>'+(a.is_headline?'★ ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
 }
 
 /* HOME */
@@ -1023,7 +1023,7 @@ function renderHome(){
     document.getElementById('hero-img').src='';
   }else{
     const h=getHeadlineArticle();
-    const isPinned=h&&h.headline===true;
+    const isPinned=h&&h.is_headline===true;
     document.getElementById('hero-empty').style.display='none';
     document.getElementById('hero-filled').style.display='flex';
     document.getElementById('hero-img').src=h.img||'';
@@ -1033,7 +1033,7 @@ function renderHome(){
     document.getElementById('hero-headline').textContent=h.headline;
     document.getElementById('hero-author').textContent=h.author;
     document.getElementById('hero-date').textContent=formatDate(h.ts);
-    document.getElementById('hero-live-label').textContent=isPinned?'Headline Story':'Latest Story';
+    document.getElementById('hero-live-label').textContent=isPinned?'Hero Article':'Latest Story';
   }
   const heroId=articles.length?getHeadlineArticle().id:null;
   const rest=articles.filter(a=>a.id!==heroId).slice(0,9);
@@ -1124,8 +1124,8 @@ function editArticle(){
   else{curImg.style.display='none';note.textContent='No image attached.';}
   editImageData=null;editKeepExistingImg=true;
   // Populate headline toggle
-  editHeadlineActive=a.headline===true;
-  document.getElementById('edit-headline-toggle').classList.toggle('active',editHeadlineActive);
+  editHeroActive=a.is_headline===true;
+  document.getElementById('edit-hero-toggle').classList.toggle('active',editHeroActive);
   resetEditImage();
   document.getElementById('edit-modal-overlay').classList.add('open');
 }
@@ -1144,20 +1144,20 @@ async function saveEdit(){
   btn.disabled=true;btn.textContent='Saving...';
   const a=articles.find(x=>x.id===currentArticleId);
   const updatedImg=editImageData!==null?editImageData:(editKeepExistingImg?(a.img||null):null);
-  const updates={headline,category,body,img:updatedImg,is_headline:editHeadlineActive};
+  const updates={headline,category,body,img:updatedImg,is_headline:editHeroActive};
   try{
     // If pinning as headline, unpin any other pinned articles first
-    if(editHeadlineActive){
-      const otherPinned=articles.filter(x=>x.id!==currentArticleId&&x.headline===true);
+    if(editHeroActive){
+      const otherPinned=articles.filter(x=>x.id!==currentArticleId&&x.is_headline===true);
       if(otherPinned.length>0){
         await db.from('articles').update({is_headline:false}).eq('is_headline',true);
-        articles=articles.map(x=>x.id!==currentArticleId?{...x,headline:false,is_headline:false}:x);
+        articles=articles.map(x=>x.id!==currentArticleId?{...x,is_headline:false}:x);
       }
     }
     const{data,error}=await db.from('articles').update(updates).eq('id',currentArticleId).select();
     if(error)throw new Error(error.message);
     // Update local array
-    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates,headline:editHeadlineActive}:x);
+    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates,is_headline:editHeroActive}:x);
     // Re-render article page directly without calling openArticle (avoids view increment)
     const updated=articles.find(x=>x.id===currentArticleId);
     const imgEl=document.getElementById('article-img');
@@ -1266,13 +1266,13 @@ function resetEditImage(){
 }
 
 /* HEADLINE TOGGLE */
-function toggleHeadline(context){
+function toggleHero(context){
   if(context==='submit'){
-    submitHeadlineActive=!submitHeadlineActive;
-    document.getElementById('submit-headline-toggle').classList.toggle('active',submitHeadlineActive);
+    submitHeroActive=!submitHeroActive;
+    document.getElementById('submit-hero-toggle').classList.toggle('active',submitHeroActive);
   }else{
-    editHeadlineActive=!editHeadlineActive;
-    document.getElementById('edit-headline-toggle').classList.toggle('active',editHeadlineActive);
+    editHeroActive=!editHeroActive;
+    document.getElementById('edit-hero-toggle').classList.toggle('active',editHeroActive);
   }
 }
 
@@ -1291,14 +1291,14 @@ async function submitStory(){
     catch(e){errEl.textContent='Database not connected: '+e.message;errEl.style.display='block';return;}
   }
   btn.disabled=true;btn.textContent='Publishing...';
-  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false,is_headline:submitHeadlineActive};
+  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false,is_headline:submitHeroActive};
   try{
     // If pinning as headline, unpin any existing headline articles first
-    if(submitHeadlineActive){
-      const existingPinned=articles.filter(a=>a.headline===true||a.is_headline===true);
+    if(submitHeroActive){
+      const existingPinned=articles.filter(a=>a.is_headline===true);
       if(existingPinned.length>0){
         await db.from('articles').update({is_headline:false}).eq('is_headline',true);
-        articles=articles.map(a=>({...a,headline:false,is_headline:false}));
+        articles=articles.map(a=>({...a,is_headline:false}));
       }
     }
     const insertPromise=db.from('articles').insert([newArticle]).select();
@@ -1306,13 +1306,13 @@ async function submitStory(){
     const{data,error}=await Promise.race([insertPromise,timeoutPromise]);
     if(error)throw new Error(error.message);
     if(!data||data.length===0)throw new Error('Insert returned no data. Check your RLS insert policy.');
-    const inserted={...data[0],headline:data[0].is_headline??false};
+    const inserted={...data[0],is_headline:data[0].is_headline??false};
     articles.unshift(inserted);
     newestTs=inserted.ts;
     await archiveOldArticles();
     renderHome();renderTicker();
-    submitHeadlineActive=false;
-    document.getElementById('submit-headline-toggle').classList.remove('active');
+    submitHeroActive=false;
+    document.getElementById('submit-hero-toggle').classList.remove('active');
     document.getElementById('submit-form-wrap').style.display='none';
     document.getElementById('submit-success').style.display='block';
   }catch(err){errEl.textContent='Publish failed: '+err.message;errEl.style.display='block';}
