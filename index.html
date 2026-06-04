@@ -882,7 +882,7 @@ async function fetchArticles(){
   try{
     const{data,error}=await db.from('articles').select('*').order('ts',{ascending:false});
     if(error)throw new Error(error.message);
-    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0,is_headline:a.is_headline??false}));
+    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0,is_hero:a.is_hero??false}));
     newestTs=articles.length?articles[0].ts:0;
     clearTimeout(loadingTimeout);
   }catch(err){
@@ -890,7 +890,7 @@ async function fetchArticles(){
     showConfigBanner(SUPABASE_URL==='YOUR_SUPABASE_URL'?'Supabase credentials not set.':'Could not reach Supabase. Check CORS settings and that the articles table exists.');
   }finally{renderHome();renderTicker();hideLoading();}
 }
-function getHeadlineArticle(){return articles.find(a=>a.is_headline===true)||articles[0]||null;}
+function getHeadlineArticle(){return articles.find(a=>a.is_hero===true)||articles[0]||null;}
 function hideLoading(){const o=document.getElementById('loading-overlay');o.classList.add('hidden');setTimeout(()=>o.style.display='none',400);}
 function showConfigBanner(msg){const b=document.createElement('div');b.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--fog);padding:14px 24px;border-radius:4px;font-size:13px;z-index:200;border-left:4px solid var(--lime);max-width:520px;text-align:center;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.3);';b.innerHTML='<svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>  '+msg;document.body.appendChild(b);setTimeout(()=>b.remove(),10000);}
 
@@ -1002,7 +1002,7 @@ async function incrementViews(id){
 function renderTicker(){
   const el=document.getElementById('ticker-content');if(!el)return;
   if(articles.length===0){el.style.animation='none';el.innerHTML='<span class="ticker-empty">No stories filed yet. Be the first to report from Amplon.</span>';return;}
-  const pinned=articles.find(a=>a.is_headline===true);
+  const pinned=articles.find(a=>a.is_hero===true);
   let tickerArticles;
   if(pinned){
     const others=articles.filter(a=>a.id!==pinned.id).slice(0,2);
@@ -1012,7 +1012,7 @@ function renderTicker(){
   }
   const doubled=[...tickerArticles,...tickerArticles];
   el.style.animation='ticker-scroll 45s linear infinite';
-  el.innerHTML=doubled.map(a=>'<span>'+(a.is_headline?'★ ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
+  el.innerHTML=doubled.map(a=>'<span>'+(a.is_hero?'★ ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
 }
 
 /* HOME */
@@ -1023,7 +1023,7 @@ function renderHome(){
     document.getElementById('hero-img').src='';
   }else{
     const h=getHeadlineArticle();
-    const isPinned=h&&h.is_headline===true;
+    const isPinned=h&&h.is_hero===true;
     document.getElementById('hero-empty').style.display='none';
     document.getElementById('hero-filled').style.display='flex';
     document.getElementById('hero-img').src=h.img||'';
@@ -1124,7 +1124,7 @@ function editArticle(){
   else{curImg.style.display='none';note.textContent='No image attached.';}
   editImageData=null;editKeepExistingImg=true;
   // Populate headline toggle
-  editHeroActive=a.is_headline===true;
+  editHeroActive=a.is_hero===true;
   document.getElementById('edit-hero-toggle').classList.toggle('active',editHeroActive);
   resetEditImage();
   document.getElementById('edit-modal-overlay').classList.add('open');
@@ -1144,20 +1144,20 @@ async function saveEdit(){
   btn.disabled=true;btn.textContent='Saving...';
   const a=articles.find(x=>x.id===currentArticleId);
   const updatedImg=editImageData!==null?editImageData:(editKeepExistingImg?(a.img||null):null);
-  const updates={headline,category,body,img:updatedImg,is_headline:editHeroActive};
+  const updates={headline,category,body,img:updatedImg,is_hero:editHeroActive};
   try{
     // If pinning as headline, unpin any other pinned articles first
     if(editHeroActive){
-      const otherPinned=articles.filter(x=>x.id!==currentArticleId&&x.is_headline===true);
+      const otherPinned=articles.filter(x=>x.id!==currentArticleId&&x.is_hero===true);
       if(otherPinned.length>0){
-        await db.from('articles').update({is_headline:false}).eq('is_headline',true);
-        articles=articles.map(x=>x.id!==currentArticleId?{...x,is_headline:false}:x);
+        await db.from('articles').update({is_hero:false}).eq('is_hero',true);
+        articles=articles.map(x=>x.id!==currentArticleId?{...x,is_hero:false}:x);
       }
     }
     const{data,error}=await db.from('articles').update(updates).eq('id',currentArticleId).select();
     if(error)throw new Error(error.message);
     // Update local array
-    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates,is_headline:editHeroActive}:x);
+    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates,is_hero:editHeroActive}:x);
     // Re-render article page directly without calling openArticle (avoids view increment)
     const updated=articles.find(x=>x.id===currentArticleId);
     const imgEl=document.getElementById('article-img');
@@ -1291,14 +1291,14 @@ async function submitStory(){
     catch(e){errEl.textContent='Database not connected: '+e.message;errEl.style.display='block';return;}
   }
   btn.disabled=true;btn.textContent='Publishing...';
-  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false,is_headline:submitHeroActive};
+  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false,is_hero:submitHeroActive};
   try{
     // If pinning as headline, unpin any existing headline articles first
     if(submitHeroActive){
-      const existingPinned=articles.filter(a=>a.is_headline===true);
+      const existingPinned=articles.filter(a=>a.is_hero===true);
       if(existingPinned.length>0){
-        await db.from('articles').update({is_headline:false}).eq('is_headline',true);
-        articles=articles.map(a=>({...a,is_headline:false}));
+        await db.from('articles').update({is_hero:false}).eq('is_hero',true);
+        articles=articles.map(a=>({...a,is_hero:false}));
       }
     }
     const insertPromise=db.from('articles').insert([newArticle]).select();
@@ -1306,7 +1306,7 @@ async function submitStory(){
     const{data,error}=await Promise.race([insertPromise,timeoutPromise]);
     if(error)throw new Error(error.message);
     if(!data||data.length===0)throw new Error('Insert returned no data. Check your RLS insert policy.');
-    const inserted={...data[0],is_headline:data[0].is_headline??false};
+    const inserted={...data[0],is_hero:data[0].is_hero??false};
     articles.unshift(inserted);
     newestTs=inserted.ts;
     await archiveOldArticles();
