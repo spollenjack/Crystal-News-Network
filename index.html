@@ -105,7 +105,19 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
 .story-card-tag{display:inline-block;font-size:9px;font-weight:500;padding:3px 8px;border-radius:2px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:9px;}
 .story-card-headline{font-family:"Barlow Condensed",sans-serif;font-size:18px;font-weight:500;line-height:1.25;color:var(--charcoal);letter-spacing:0.01em;}
 .story-card-meta{font-size:11px;color:var(--muted);margin-top:9px;}
-.tag-politics{background:#e0f2fe;color:#0369a1;}.tag-weather{background:#dbeafe;color:#1d4ed8;}.tag-crime{background:#fee2e2;color:#b91c1c;}.tag-sports{background:#dcfce7;color:#15803d;}.tag-business{background:#fef9c3;color:#854d0e;}.tag-breaking{background:var(--lime);color:var(--charcoal);}.tag-world{background:#f3e8ff;color:#7e22ce;}.tag-tech{background:#e0f7fa;color:#00796b;}
+.tag-politics{background:#e0f2fe;color:#0369a1;}.tag-weather{background:#dbeafe;color:#1d4ed8;}.tag-crime{background:#fee2e2;color:#b91c1c;}.tag-sports{background:#dcfce7;color:#15803d;}.tag-business{background:#fef9c3;color:#854d0e;}.tag-breaking{background:var(--lime);color:var(--charcoal);}.tag-world{background:#f3e8ff;color:#7e22ce;}.tag-tech{background:#e0f7fa;color:#00796b;}.tag-local{background:#fff7ed;color:#c2410c;}.tag-national{background:#f0fdf4;color:#166534;}
+
+/* HEADLINE TOGGLE */
+.headline-toggle-wrap{display:flex;align-items:center;gap:12px;background:var(--white);border:1px solid var(--border);border-radius:3px;padding:13px 15px;cursor:pointer;transition:border-color 0.2s;user-select:none;}
+.headline-toggle-wrap:hover{border-color:var(--emerald);}
+.headline-toggle-wrap.active{border-color:var(--lime);background:#f7ffe0;}
+.headline-toggle-pill{width:38px;height:22px;background:#ddd;border-radius:100px;position:relative;transition:background 0.2s;flex-shrink:0;}
+.headline-toggle-pill::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;background:white;border-radius:50%;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+.headline-toggle-wrap.active .headline-toggle-pill{background:var(--lime);}
+.headline-toggle-wrap.active .headline-toggle-pill::after{transform:translateX(16px);}
+.headline-toggle-text{flex:1;}
+.headline-toggle-label{font-size:13px;font-weight:500;color:var(--charcoal);}
+.headline-toggle-sub{font-size:11px;color:var(--muted);margin-top:2px;}
 .grid-empty{grid-column:1/-1;text-align:center;padding:80px 40px;color:var(--muted);}
 .grid-empty-title{font-family:"Barlow Condensed",sans-serif;font-size:20px;text-transform:uppercase;color:#ccc;margin-bottom:8px;}
 
@@ -531,6 +543,8 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
         <option value="weather">Weather</option>
         <option value="world">World</option>
         <option value="tech">Tech</option>
+        <option value="local news">Local News</option>
+        <option value="national news">National News</option>
       </select>
     </div>
     <div class="form-group">
@@ -551,6 +565,16 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
       <label class="form-label">Story</label>
       <textarea class="form-textarea" id="edit-body"></textarea>
     </div>
+    <div class="form-group">
+      <label class="form-label">Headline Story</label>
+      <div class="headline-toggle-wrap" id="edit-headline-toggle" onclick="toggleHeadline('edit')">
+        <div class="headline-toggle-pill"></div>
+        <div class="headline-toggle-text">
+          <div class="headline-toggle-label">Pin as Headline Story</div>
+          <div class="headline-toggle-sub">Pins this article to the top of the homepage and ticker until a newer headline is set.</div>
+        </div>
+      </div>
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeEditModal()">Cancel</button>
       <button class="form-submit" id="edit-save-btn" style="flex:2;" onclick="saveEdit()">Save Changes</button>
@@ -567,7 +591,7 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
     <div class="hero-content hero-clickable" id="hero-filled" style="display:none;" onclick="openHeroArticle()">
       <div class="hero-eyebrow">
         <span class="story-card-tag hero-tag" id="hero-tag"></span>
-        <div class="hero-live"><div class="live-dot"></div>Latest Story</div>
+        <div class="hero-live"><div class="live-dot"></div><span id="hero-live-label">Latest Story</span></div>
       </div>
       <h1 class="hero-headline" id="hero-headline"></h1>
       <div class="hero-meta">
@@ -658,6 +682,7 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
           <option value="business">Business</option><option value="crime">Crime</option>
           <option value="sports">Sports</option><option value="weather">Weather</option>
           <option value="world">World</option><option value="tech">Tech</option>
+          <option value="local news">Local News</option><option value="national news">National News</option>
         </select>
       </div>
       <div class="form-group">
@@ -673,6 +698,16 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
         <button class="img-change-btn" id="img-change-btn" onclick="resetImage()"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Remove image</button>
       </div>
       <div class="form-group"><label class="form-label">Your Story</label><textarea class="form-textarea" id="field-body" placeholder="Write your full report here. Separate paragraphs with a blank line."></textarea></div>
+      <div class="form-group">
+        <label class="form-label">Headline Story</label>
+        <div class="headline-toggle-wrap" id="submit-headline-toggle" onclick="toggleHeadline('submit')">
+          <div class="headline-toggle-pill"></div>
+          <div class="headline-toggle-text">
+            <div class="headline-toggle-label">Pin as Headline Story</div>
+            <div class="headline-toggle-sub">Pins this article to the top of the homepage and ticker until a newer headline is set.</div>
+          </div>
+        </div>
+      </div>
       <button class="form-submit" id="submit-btn" onclick="submitStory()">Publish Story</button>
     </div>
     <div class="submit-success" id="submit-success">
@@ -747,8 +782,8 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
           <input type="text" class="form-input" id="archive-title" placeholder="e.g. CNN Archive - January 2026">
         </div>
         <div class="form-group" style="margin-bottom:0;">
-          <label class="form-label">CSV File</label>
-          <input type="file" accept=".csv" class="form-input" id="archive-file" style="padding:10px 15px;">
+          <label class="form-label">ZIP File</label>
+          <input type="file" accept=".zip" class="form-input" id="archive-file" style="padding:10px 15px;">
         </div>
         <div class="form-group archive-form-full" style="margin-bottom:0;">
           <label class="form-label">Description <span style="color:#bbb;font-size:9px;">(optional)</span></label>
@@ -814,13 +849,14 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
 const SUPABASE_URL      = 'https://kjazrloguirmpoybkxjy.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqYXpybG9ndWlybXBveWJreGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0MTAzMzEsImV4cCI6MjA5Mzk4NjMzMX0.yeH_od9r7Q7plf1ODir_cwIKE8gSO6vL_CZEwsxLM4g';
 
-const CATEGORIES = ['Breaking','Politics','Business','Crime','Sports','Weather','World','Tech'];
-const TAG_MAP = {politics:'tag-politics',weather:'tag-weather',crime:'tag-crime',sports:'tag-sports',business:'tag-business',breaking:'tag-breaking',world:'tag-world',tech:'tag-tech'};
+const CATEGORIES = ['Breaking','Politics','Business','Crime','Sports','Weather','World','Tech','Local News','National News'];
+const TAG_MAP = {politics:'tag-politics',weather:'tag-weather',crime:'tag-crime',sports:'tag-sports',business:'tag-business',breaking:'tag-breaking',world:'tag-world',tech:'tag-tech','local news':'tag-local','national news':'tag-national'};
 
 
 let articles = [], pendingImageData = null, editImageData = null, editKeepExistingImg = true;
 let prevPage = 'home', currentArticleId = null, db = null, loadingTimeout = null, newestTs = 0, articleStack = [];
 let autoRefreshTimer = null;
+let submitHeadlineActive = false, editHeadlineActive = false;
 
 /* HELPERS */
 function tagClass(cat){return TAG_MAP[(cat||'').toLowerCase()]||'tag-breaking';}
@@ -846,7 +882,7 @@ async function fetchArticles(){
   try{
     const{data,error}=await db.from('articles').select('*').order('ts',{ascending:false});
     if(error)throw new Error(error.message);
-    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0}));
+    articles=(data||[]).map(a=>({...a,archived:a.archived??false,views:a.views??0,likes:a.likes??0,dislikes:a.dislikes??0,headline:a.is_headline??false}));
     newestTs=articles.length?articles[0].ts:0;
     clearTimeout(loadingTimeout);
   }catch(err){
@@ -854,6 +890,7 @@ async function fetchArticles(){
     showConfigBanner(SUPABASE_URL==='YOUR_SUPABASE_URL'?'Supabase credentials not set.':'Could not reach Supabase. Check CORS settings and that the articles table exists.');
   }finally{renderHome();renderTicker();hideLoading();}
 }
+function getHeadlineArticle(){return articles.find(a=>a.headline===true)||articles[0]||null;}
 function hideLoading(){const o=document.getElementById('loading-overlay');o.classList.add('hidden');setTimeout(()=>o.style.display='none',400);}
 function showConfigBanner(msg){const b=document.createElement('div');b.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--fog);padding:14px 24px;border-radius:4px;font-size:13px;z-index:200;border-left:4px solid var(--lime);max-width:520px;text-align:center;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.3);';b.innerHTML='<svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>  '+msg;document.body.appendChild(b);setTimeout(()=>b.remove(),10000);}
 
@@ -896,7 +933,7 @@ function renderArchiveList(archives) {
       ${desc}
       <div class="archive-card-meta">Uploaded ${formatDate(a.uploaded_at)}</div>
       <div class="archive-card-actions">
-        <a class="archive-download-btn" href="${a.file_url}" download="${a.filename}"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download CSV</a>
+        <a class="archive-download-btn" href="${a.file_url}" download="${a.filename}"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> Download ZIP</a>
         <button class="archive-delete-btn" onclick="deleteArchive(${a.id}, '${a.filename}')" title="Delete"><svg class="icn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
       </div>
     </div>`;
@@ -912,12 +949,12 @@ async function uploadArchive() {
   const btn = document.getElementById('archive-upload-btn');
   errEl.style.display = 'none';
   if (!title) { errEl.textContent = 'Please enter a title.'; errEl.style.display = 'block'; return; }
-  if (!file) { errEl.textContent = 'Please select a CSV file.'; errEl.style.display = 'block'; return; }
-  if (!file.name.endsWith('.csv')) { errEl.textContent = 'Only CSV files are accepted.'; errEl.style.display = 'block'; return; }
+  if (!file) { errEl.textContent = 'Please select a ZIP file.'; errEl.style.display = 'block'; return; }
+  if (!file.name.endsWith('.zip')) { errEl.textContent = 'Only ZIP files are accepted.'; errEl.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'Uploading...';
   try {
     const filename = 'archive_' + Date.now() + '_' + file.name.replace(/[^a-z0-9._-]/gi, '_');
-    const { error: storageError } = await db.storage.from('cnn-archives').upload(filename, file, { contentType: 'text/csv', upsert: false });
+    const { error: storageError } = await db.storage.from('cnn-archives').upload(filename, file, { contentType: 'application/zip', upsert: false });
     if (storageError) throw new Error('Storage: ' + storageError.message);
     const { data: urlData } = db.storage.from('cnn-archives').getPublicUrl(filename);
     const { error } = await db.from('archives').insert([{
@@ -965,9 +1002,17 @@ async function incrementViews(id){
 function renderTicker(){
   const el=document.getElementById('ticker-content');if(!el)return;
   if(articles.length===0){el.style.animation='none';el.innerHTML='<span class="ticker-empty">No stories filed yet. Be the first to report from Amplon.</span>';return;}
-  const latest=articles.slice(0,3),doubled=[...latest,...latest];
+  const pinned=articles.find(a=>a.headline===true);
+  let tickerArticles;
+  if(pinned){
+    const others=articles.filter(a=>a.id!==pinned.id).slice(0,2);
+    tickerArticles=[pinned,...others];
+  }else{
+    tickerArticles=articles.slice(0,3);
+  }
+  const doubled=[...tickerArticles,...tickerArticles];
   el.style.animation='ticker-scroll 45s linear infinite';
-  el.innerHTML=doubled.map(a=>'<span>'+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
+  el.innerHTML=doubled.map(a=>'<span>'+(a.headline?'★ ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
 }
 
 /* HOME */
@@ -977,7 +1022,8 @@ function renderHome(){
     document.getElementById('hero-empty').style.display='flex';
     document.getElementById('hero-img').src='';
   }else{
-    const h=articles[0];
+    const h=getHeadlineArticle();
+    const isPinned=h&&h.headline===true;
     document.getElementById('hero-empty').style.display='none';
     document.getElementById('hero-filled').style.display='flex';
     document.getElementById('hero-img').src=h.img||'';
@@ -987,8 +1033,10 @@ function renderHome(){
     document.getElementById('hero-headline').textContent=h.headline;
     document.getElementById('hero-author').textContent=h.author;
     document.getElementById('hero-date').textContent=formatDate(h.ts);
+    document.getElementById('hero-live-label').textContent=isPinned?'Headline Story':'Latest Story';
   }
-  const rest=articles.slice(1,10);
+  const heroId=articles.length?getHeadlineArticle().id:null;
+  const rest=articles.filter(a=>a.id!==heroId).slice(0,9);
   document.getElementById('home-grid').innerHTML=rest.length?rest.map(buildCard).join(''): '<div class="grid-empty"><div class="grid-empty-title">No further stories yet</div>Submit a story to get the newsroom started.</div>';
 }
 
@@ -1035,7 +1083,7 @@ function openArticle(id,fromHistory){
   showPage('article');
   if(!fromHistory)incrementViews(id);
 }
-function openHeroArticle(){if(articles.length)openArticle(articles[0].id);}
+function openHeroArticle(){const h=getHeadlineArticle();if(h)openArticle(h.id);}
 function goBack(){
   if(articleStack.length){openArticle(articleStack.pop(),true);}
   else{showPage(prevPage);}
@@ -1075,6 +1123,9 @@ function editArticle(){
   else if(a.archived){curImg.style.display='none';note.textContent='This article is archived. Its image has been removed.';}
   else{curImg.style.display='none';note.textContent='No image attached.';}
   editImageData=null;editKeepExistingImg=true;
+  // Populate headline toggle
+  editHeadlineActive=a.headline===true;
+  document.getElementById('edit-headline-toggle').classList.toggle('active',editHeadlineActive);
   resetEditImage();
   document.getElementById('edit-modal-overlay').classList.add('open');
 }
@@ -1093,12 +1144,20 @@ async function saveEdit(){
   btn.disabled=true;btn.textContent='Saving...';
   const a=articles.find(x=>x.id===currentArticleId);
   const updatedImg=editImageData!==null?editImageData:(editKeepExistingImg?(a.img||null):null);
-  const updates={headline,category,body,img:updatedImg};
+  const updates={headline,category,body,img:updatedImg,is_headline:editHeadlineActive};
   try{
+    // If pinning as headline, unpin any other pinned articles first
+    if(editHeadlineActive){
+      const otherPinned=articles.filter(x=>x.id!==currentArticleId&&x.headline===true);
+      if(otherPinned.length>0){
+        await db.from('articles').update({is_headline:false}).eq('is_headline',true);
+        articles=articles.map(x=>x.id!==currentArticleId?{...x,headline:false,is_headline:false}:x);
+      }
+    }
     const{data,error}=await db.from('articles').update(updates).eq('id',currentArticleId).select();
     if(error)throw new Error(error.message);
     // Update local array
-    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates}:x);
+    articles=articles.map(x=>x.id===currentArticleId?{...x,...updates,headline:editHeadlineActive}:x);
     // Re-render article page directly without calling openArticle (avoids view increment)
     const updated=articles.find(x=>x.id===currentArticleId);
     const imgEl=document.getElementById('article-img');
@@ -1206,6 +1265,17 @@ function resetEditImage(){
   document.getElementById('edit-img-change-btn').style.display='none';
 }
 
+/* HEADLINE TOGGLE */
+function toggleHeadline(context){
+  if(context==='submit'){
+    submitHeadlineActive=!submitHeadlineActive;
+    document.getElementById('submit-headline-toggle').classList.toggle('active',submitHeadlineActive);
+  }else{
+    editHeadlineActive=!editHeadlineActive;
+    document.getElementById('edit-headline-toggle').classList.toggle('active',editHeadlineActive);
+  }
+}
+
 /* SUBMIT */
 async function submitStory(){
   const name=document.getElementById('field-name').value.trim();
@@ -1221,17 +1291,28 @@ async function submitStory(){
     catch(e){errEl.textContent='Database not connected: '+e.message;errEl.style.display='block';return;}
   }
   btn.disabled=true;btn.textContent='Publishing...';
-  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false};
+  const newArticle={headline,category,author:name,ts:Date.now(),img:pendingImageData||null,body,views:0,archived:false,is_headline:submitHeadlineActive};
   try{
+    // If pinning as headline, unpin any existing headline articles first
+    if(submitHeadlineActive){
+      const existingPinned=articles.filter(a=>a.headline===true||a.is_headline===true);
+      if(existingPinned.length>0){
+        await db.from('articles').update({is_headline:false}).eq('is_headline',true);
+        articles=articles.map(a=>({...a,headline:false,is_headline:false}));
+      }
+    }
     const insertPromise=db.from('articles').insert([newArticle]).select();
     const timeoutPromise=new Promise((_,reject)=>setTimeout(()=>reject(new Error('Request timed out after 10 seconds')),10000));
     const{data,error}=await Promise.race([insertPromise,timeoutPromise]);
     if(error)throw new Error(error.message);
     if(!data||data.length===0)throw new Error('Insert returned no data. Check your RLS insert policy.');
-    articles.unshift(data[0]);
-    newestTs=data[0].ts;
+    const inserted={...data[0],headline:data[0].is_headline??false};
+    articles.unshift(inserted);
+    newestTs=inserted.ts;
     await archiveOldArticles();
     renderHome();renderTicker();
+    submitHeadlineActive=false;
+    document.getElementById('submit-headline-toggle').classList.remove('active');
     document.getElementById('submit-form-wrap').style.display='none';
     document.getElementById('submit-success').style.display='block';
   }catch(err){errEl.textContent='Publish failed: '+err.message;errEl.style.display='block';}
