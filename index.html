@@ -37,7 +37,7 @@ body{font-family:"Inter",sans-serif;background:var(--fog);color:var(--charcoal);
 .navbar-cta:hover{background:#bef264;}
 
 /* TICKER */
-.ticker{background:var(--lime);height:34px;display:flex;align-items:center;overflow:hidden;position:sticky;top:64px;z-index:98;}
+.ticker{background:var(--lime);height:34px;display:flex;align-items:center;overflow:hidden;position:sticky;:64px;z-index:98;}
 .ticker-label{background:var(--emerald);color:white;font-size:10px;font-weight:500;padding:0 16px;height:100%;display:flex;align-items:center;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
 .ticker-track{overflow:hidden;flex:1;height:100%;display:flex;align-items:center;}
 .ticker-content{display:flex;white-space:nowrap;font-size:12px;font-weight:500;color:var(--charcoal);letter-spacing:0.02em;animation:ticker-scroll 45s linear infinite;}
@@ -1012,7 +1012,7 @@ function renderTicker(){
   }
   const doubled=[...tickerArticles,...tickerArticles];
   el.style.animation='ticker-scroll 45s linear infinite';
-  el.innerHTML=doubled.map(a=>'<span>'+(a.is_hero?'|TOP| ':' |')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
+  el.innerHTML=doubled.map(a=>'<span>'+(a.is_hero?'|TOP| ':'')+a.headline+'<span class="ticker-dot"> ◆ </span></span>').join('');
 }
 
 /* HOME */
